@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val cuadradoView: View = findViewById(R.id.rectanguloX)
-        val cuadrado: Rectangulo=Rectangulo(ContextCompat.getColor(this, R.color.blue),100,100)
+        val cuadrado: Rectangulo=Rectangulo(ContextCompat.getColor(this, R.color.red),100,100)
 
         val buttonArriba: Button = findViewById(R.id.buttonArriba)
         val buttonAbajo: Button = findViewById(R.id.buttonAbajo)
@@ -27,23 +27,41 @@ class MainActivity : AppCompatActivity() {
 
         buttonArriba.setOnClickListener {
             cuadrado.MoverArriba()
+            actualizarVista(cuadrado,cuadradoView)
         }
         buttonAbajo.setOnClickListener {
             cuadrado.MoverAbajo()
+            actualizarVista(cuadrado,cuadradoView)
         }
         buttonIzquierda.setOnClickListener {
             cuadrado.MoverIzquierda()
+            actualizarVista(cuadrado,cuadradoView)
         }
         buttonDerecha.setOnClickListener {
             cuadrado.MoverDerecha()
+            actualizarVista(cuadrado,cuadradoView)
         }
         buttonCambiarTamano.setOnClickListener {
             cuadrado.CambiarTamano()
+            actualizarVista(cuadrado,cuadradoView)
         }
         buttonCambiarColor.setOnClickListener {
-            cuadrado.color = ContextCompat.getColor(R.color.blue)
+            cuadrado.color = ContextCompat.getColor(this,R.color.blue)
+            actualizarVista(cuadrado,cuadradoView)
         }
+    }
 
+    private fun actualizarVista(cuadrado:Rectangulo, cuadradoView:View){
+
+        cuadradoView.layoutParams.width = cuadrado.ancho
+        cuadradoView.layoutParams.height = cuadrado.alto
+
+        cuadradoView.setBackgroundColor(cuadrado.color)
+
+        cuadradoView.x = cuadrado.x.toFloat()
+        cuadradoView.y = cuadrado.y.toFloat()
+
+        cuadradoView.requestLayout()
     }
 }
 
@@ -56,7 +74,7 @@ class Rectangulo(var color:Int, var ancho:Int, var alto:Int) {
     }
 
     fun MoverAbajo(){
-        if (y!=100) y+=10
+        if (y!=1000) y+=10
     }
 
     fun MoverIzquierda(){
@@ -64,7 +82,7 @@ class Rectangulo(var color:Int, var ancho:Int, var alto:Int) {
     }
 
     fun MoverDerecha(){
-        if (x!=100) x+=10
+        if (x!=1000) x+=10
     }
 
     fun CambiarTamano(){

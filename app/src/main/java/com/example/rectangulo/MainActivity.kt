@@ -1,8 +1,11 @@
 package com.example.rectangulo
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -12,7 +15,35 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        
+        val cuadradoView: View = findViewById(R.id.rectanguloX)
+        val cuadrado: Rectangulo=Rectangulo(ContextCompat.getColor(this, R.color.blue),100,100)
+
+        val buttonArriba: Button = findViewById(R.id.buttonArriba)
+        val buttonAbajo: Button = findViewById(R.id.buttonAbajo)
+        val buttonIzquierda: Button = findViewById(R.id.buttonIzquierda)
+        val buttonDerecha: Button = findViewById(R.id.buttonDerecha)
+        val buttonCambiarTamano: Button = findViewById(R.id.buttonCambiarTamano)
+        val buttonCambiarColor: Button = findViewById(R.id.buttonCambiarColor)
+
+        buttonArriba.setOnClickListener {
+            cuadrado.MoverArriba()
+        }
+        buttonAbajo.setOnClickListener {
+            cuadrado.MoverAbajo()
+        }
+        buttonIzquierda.setOnClickListener {
+            cuadrado.MoverIzquierda()
+        }
+        buttonDerecha.setOnClickListener {
+            cuadrado.MoverDerecha()
+        }
+        buttonCambiarTamano.setOnClickListener {
+            cuadrado.CambiarTamano()
+        }
+        buttonCambiarColor.setOnClickListener {
+            cuadrado.color = ContextCompat.getColor(R.color.blue)
+        }
+
     }
 }
 
@@ -37,13 +68,13 @@ class Rectangulo(var color:Int, var ancho:Int, var alto:Int) {
     }
 
     fun CambiarTamano(){
-        if(ancho==10){
-            ancho=5
-            alto=5
+        if(ancho==100){
+            ancho=50
+            alto=50
         } else
         {
-            ancho=10
-            alto=10
+            ancho=100
+            alto=100
         }
     }
 }

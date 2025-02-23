@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <View
-        android:id="@+id/rectangulo"
+        android:id="@+id/rectanguloX"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="#FF0000"
@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Arriba"
-        android:layout_below="@id/rectangulo"
+        android:layout_below="@id/rectanguloX"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"/>
 

@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                 actualizarVista(cuadrado,cuadradoView)
             }
             buttonCambiarColorBorde.setOnClickListener {
-                cuadrado.cambiarColorBorde(generarColorAleatorio())
+                cuadrado.cambiarColorBorde(RectanguloConBordes.ManejoColor.ObtenerColorAleatorio())
                 actualizarVista(cuadrado,cuadradoView)
             }
         }
@@ -105,7 +105,22 @@ class MainActivity : AppCompatActivity() {
 }
 
 class RectanguloConBordes(override var color:Int, override var alto:Int, override var ancho:Int, bordeColor:Int=Color.BLACK): Rectangulo(color, ancho, alto) {
+
     var bordeColor:Int=Color.BLACK
+
+    class ManejoColor{
+        companion object {
+            val rojo=Color.RED
+            val azul=Color.BLUE
+            val verde=Color.GREEN
+            val negro=Color.BLACK
+
+            fun ObtenerColorAleatorio():Int{
+                val colores = listOf(rojo, azul, verde, negro)
+                return colores.random()
+            }
+        }
+    }
 
     fun cambiarColorBorde(nuevoColorBorde:Int){
         bordeColor = nuevoColorBorde

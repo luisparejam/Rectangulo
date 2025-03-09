@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity() {
             val inicialAlto = cuadradoView.height.toInt()
 
             val cuadrado: RectanguloConBordes = RectanguloConBordes(ContextCompat.getColor(this, R.color.red),inicialAncho,inicialAlto).apply {
-                x = inicialX
-                y = inicialY
+                dimensiones.x = inicialX
+                dimensiones.y = inicialY
                 bordeColor=ContextCompat.getColor(this@MainActivity, R.color.black)
             }
 
@@ -92,19 +92,23 @@ class MainActivity : AppCompatActivity() {
 
         cuadradoView.background=drawable
 
-        cuadradoView.layoutParams.width = cuadrado.ancho
-        cuadradoView.layoutParams.height = cuadrado.alto
+        cuadradoView.layoutParams.width = cuadrado.dimensiones.ancho
+        cuadradoView.layoutParams.height = cuadrado.dimensiones.alto
 
         //cuadradoView.setBackgroundColor(cuadrado.color)
 
-        cuadradoView.x = cuadrado.x.toFloat()
-        cuadradoView.y = cuadrado.y.toFloat()
+        cuadradoView.x = cuadrado.dimensiones.x.toFloat()
+        cuadradoView.y = cuadrado.dimensiones.y.toFloat()
 
         cuadradoView.requestLayout()
     }
 }
 
-class RectanguloConBordes(override var color:Int, override var alto:Int, override var ancho:Int, bordeColor:Int=Color.BLACK): Rectangulo(color, ancho, alto) {
+data class MiDimension(var x:Int, var y:Int, var ancho:Int, var alto:Int){
+
+}
+
+class RectanguloConBordes(color:Int, alto:Int, ancho:Int, bordeColor:Int=Color.BLACK): Rectangulo(color, ancho, alto) {
 
     var bordeColor:Int=Color.BLACK
 
@@ -128,37 +132,42 @@ class RectanguloConBordes(override var color:Int, override var alto:Int, overrid
 }
 
 open class Rectangulo(open var color:Int, open var ancho:Int, open var alto:Int) {
+
+    /*
     var x:Int = 0
     var y:Int = 0
+    */
+
+    var dimensiones = MiDimension(0,0, ancho, alto)
 
     var flagTamano:Int = 0
 
     fun MoverArriba(){
-        if (y-40 > 40) y-=40
+        if (dimensiones.y-40 > 40) dimensiones.y-=40
     }
 
     fun MoverAbajo(){
-        if (y+40 < 1100) y+=40
+        if (dimensiones.y+40 < 1100) dimensiones.y+=40
     }
 
     fun MoverIzquierda(){
-        if (x-40 > 0) x-=40
+        if (dimensiones.x-40 > 0) dimensiones.x-=40
     }
 
     fun MoverDerecha(){
-        if (x+40 < 820) x+=40
+        if (dimensiones.x+40 < 820) dimensiones.x+=40
     }
 
     fun CambiarTamano(){
         if(flagTamano==0){
             flagTamano = 1
-            ancho /= 2
-            alto /=  2
+            dimensiones.ancho /= 2
+            dimensiones.alto /=  2
         } else
         {
             flagTamano = 0
-            ancho *= 2
-            alto *= 2
+            dimensiones.ancho *= 2
+            dimensiones.alto *= 2
         }
     }
 }
